@@ -25,6 +25,7 @@
     "coyno-chain": "^0.0.1",
     "coyno-log": "^0.0.1",
     "coyno-mongo": "^0.0.1",
+    "coyno-util": "^0.0.1",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

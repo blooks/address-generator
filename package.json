@@ -1,6 +1,6 @@
 {
   "name": "coyno-wallets",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Wallets library",
   "main": "index.js",
   "repository": {
@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "coyno-chain": "^0.0.1",
-    "coyno-log": "^0.0.1",
-    "coyno-mongo": "^0.0.1",
-    "coyno-util": "^0.0.1",
+    "coyno-chain": "^0.0.2",
+    "coyno-log": "^0.0.2",
+    "coyno-mongo": "^0.0.2",
+    "coyno-util": "^0.0.2",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

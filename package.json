@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "coyno-chain": "0.0.4",
-    "coyno-config": "0.0.5",
-    "coyno-converter": "^0.0.24",
-    "coyno-log": "0.0.5",
-    "coyno-mongo": "^0.0.4",
-    "coyno-util": "0.0.5",
+    "coyno-chain": "0.0.5",
+    "coyno-config": "0.0.6",
+    "coyno-converter": "^0.0.25",
+    "coyno-log": "0.0.6",
+    "coyno-mongo": "^0.0.5",
+    "coyno-util": "0.0.6",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

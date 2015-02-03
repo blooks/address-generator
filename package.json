@@ -23,6 +23,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "bitcore": "^0.9.4",
+    "bitcore-armory": "^0.1.2",
     "bitcore-electrum": "0.0.4",
     "coyno-chain": "^0.0.9",
     "coyno-config": "^0.0.10",

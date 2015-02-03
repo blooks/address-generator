@@ -24,12 +24,12 @@
     "async": "^0.9.0",
     "bitcore": "^0.9.4",
     "bitcore-electrum": "0.0.4",
-    "coyno-chain": "^0.0.8",
-    "coyno-config": "^0.0.9",
+    "coyno-chain": "^0.0.9",
+    "coyno-config": "^0.0.10",
     "coyno-converter": "^0.0.26",
-    "coyno-log": "^0.0.9",
-    "coyno-mongo": "^0.0.8",
-    "coyno-util": "^0.0.9",
+    "coyno-log": "^0.0.10",
+    "coyno-mongo": "^0.0.9",
+    "coyno-util": "^0.0.10",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

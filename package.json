@@ -25,12 +25,12 @@
     "bitcore": "^0.9.4",
     "bitcore-armory": "^0.1.2",
     "bitcore-electrum": "0.0.4",
-    "coyno-chain": "^0.0.11",
-    "coyno-config": "^0.0.12",
+    "coyno-chain": "^0.0.12",
+    "coyno-config": "^0.0.13",
     "coyno-converter": "^0.0.26",
-    "coyno-log": "^0.0.12",
-    "coyno-mongo": "^0.0.11",
-    "coyno-util": "^0.0.12",
+    "coyno-log": "^0.0.13",
+    "coyno-mongo": "^0.0.12",
+    "coyno-util": "^0.0.13",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "coyno-wallets",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Wallets library",
   "main": "index.js",
   "repository": {
@@ -29,12 +29,12 @@
     "bitcore": "^0.9.4",
     "bitcore-armory": "^0.1.2",
     "bitcore-electrum": "0.0.4",
-    "coyno-chain": "^0.1.0",
-    "coyno-config": "^0.0.13",
-    "coyno-converter": "^0.0.26",
-    "coyno-log": "^0.0.13",
-    "coyno-mongo": "^0.0.12",
-    "coyno-util": "^0.0.13",
+    "coyno-chain": "0.1.x",
+    "coyno-config": "0.0.x",
+    "coyno-converter": "0.0.x",
+    "coyno-log": "0.0.x",
+    "coyno-mongo": "0.0.x",
+    "coyno-util": "0.0.x",
     "lodash": "^2.4.1"
   },
   "devDependencies": {

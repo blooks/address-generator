@@ -1,6 +1,6 @@
 {
   "name": "coyno-wallets",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Wallets library",
   "main": "index.js",
   "repository": {

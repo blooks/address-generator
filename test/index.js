@@ -4,8 +4,12 @@ var TestDataManager = require('./testData');
 var mongo = require('coyno-mongo');
 var should = require('should');
 var _ = require('lodash');
-var coynoWallets = require('../index');
-var BIP32Wallet = coynoWallets.BIP32Wallet;
+var sinon = require('sinon');
+var mockery = require('mockery');
+var converterStub = sinon.stub();
+
+var BIP32Wallet = require('../lib/bip32');
+
 var testDataManager = new TestDataManager();
 
 var getWallet = function(db, id) {
@@ -36,6 +40,7 @@ after(function(done) {
 describe('Basic Tests', function() {
 
   before(function(done) {
+
     testDataManager.fillDB(function(err) {
       done(err);
     });

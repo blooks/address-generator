@@ -12,6 +12,17 @@ var bitcoinwalletwallet = {
   "updatedAt" : "2015-04-08T13:33:05.662Z"
 };
 
+var exchangeRate = {
+  "_id" : "551b2e9d85cf6abb6882a5ab",
+  "time" : new Date("2010-07-22T00:00:00.000Z"),
+  "rates" : {
+    "EUR": 0.0619,
+    "GBP": 0.0521,
+    "USD": 0.07920000000000001
+  }
+};
+
+
 var testDataManager = function() {};
 
 var startMongo = function (callback) {
@@ -37,6 +48,11 @@ var createAddressesCollection = function (db, callback) {
 
 var createTransfersCollection = function (db, callback) {
   db.createCollection('transfers', function (err) {
+    return callback(err, db);
+  });
+};
+var createExchangeRatesCollection = function (db, callback) {
+  db.createCollection('exchangeratesfromnpm', function (err) {
     return callback(err);
   });
 };
@@ -51,17 +67,27 @@ testDataManager.prototype.initDB = function (callback) {
     startMongo,
     createWalletsCollection,
     createAddressesCollection,
-    createTransfersCollection
+    createTransfersCollection,
+    createExchangeRatesCollection
   ], callback);
 
 };
 
-var insertWallet = function(db, callback) {
-  db.collection('bitcoinwallets').insert(bitcoinwalletwallet, callback);
+var insertWallet = function(db) {
+  return function(callback) {
+    db.collection('bitcoinwallets').insert(bitcoinwalletwallet, function (err, result) {
+        callback(err, db);
+    });
+  }
 };
-
+var insertExchangeRate = function(db, callback) {
+  db.collection('exchangeratesfromnpm').insert(exchangeRate, callback);
+};
 testDataManager.prototype.fillDB = function (callback) {
-  insertWallet(mongo.db, callback);
+  async.waterfall([
+    insertWallet(mongo.db),
+    insertExchangeRate
+  ], callback);
 };
 
 var deleteTransfers = function(db) {
@@ -100,6 +126,13 @@ var dropTransfers = function (db, callback) {
   });
 };
 
+var dropExchangeRates = function (db, callback) {
+  db.dropCollection('exchangeratesfromnpm', function(err) {
+    return callback(err, db);
+  });
+};
+
+
 var dropAddresses = function (db, callback) {
   db.dropCollection('bitcoinaddresses', function(err) {
     return callback(err, db);
@@ -111,7 +144,8 @@ testDataManager.prototype.closeDB = function (callback) {
     async.waterfall([
       dropWallets(mongo.db),
       dropAddresses,
-      dropTransfers
+      dropTransfers,
+      dropExchangeRates
     ], function (err) {
       if(err) return callback(err);
       mongo.stop(callback);

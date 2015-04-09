@@ -7,7 +7,6 @@ var _ = require('lodash');
 var Q = require('q');
 var debug = require('debug')('coyno:wallet-tests');
 var BIP32Wallet = require('../lib/bip32');
-
 var testDataManager = new TestDataManager();
 
 var getWallet = function(wallet) {

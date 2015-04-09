@@ -7,9 +7,9 @@ var bitcoinwalletwallet = {
   "type" : "bitcoin-wallet",
   "hdseed" : "xpub69FouPJPQuntZoFnvcTd1eifGCYy8Jxc8hWDbrzFHhQPFWcNaxmC4Mc5SQxiseDHNAifQtrL3AoJmrBWfBfgznecsa5dzcbMrjx3fv6f6dE",
   "userId" : "fX9qJ4c92CwLTZABK",
-  "updating" : false,
+  "updating" : true,
   "createdAt" : "2015-04-08T13:33:05.608Z",
-  "updatedAt" : "2015-04-08T13:33:05.662Z"
+  "updatedAt" : "2015-04-08T13:33:05.662Z",
 };
 
 var exchangeRate = {

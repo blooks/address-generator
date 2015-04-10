@@ -18,7 +18,7 @@ var alljs = files.concat(tests);
 gulp.task('test', function() {
   return gulp.src(tests).pipe(new mocha({
     reporter: 'spec',
-    timeout: 60000
+    timeout: 5000
   }));
 });
 

@@ -1,30 +1,36 @@
 
-var TestDataManager = require('./testData');
+var TestDataManager = require('coyno-mockup-data').Manager;
 
-var mongo = require('coyno-mongo');
+
 var should = require('should');
+var mongo = require('coyno-mongo');
 var _ = require('lodash');
 var Q = require('q');
 var debug = require('debug')('coyno:wallet-tests');
 var BIP32Wallet = require('../lib/bip32');
+
 var testDataManager = new TestDataManager();
 
 var getWallet = function(wallet) {
   var deferred = Q.defer();
+  debug('Getting Wallet');
+  debug('Coyno Mongo Object:', mongo.db);
   mongo.db.collection('bitcoinwallets').find({_id: wallet._id}).toArray(function (err, result) {
-      if (!result || result.length < 1) {
-        deferred.reject(new Error('Getting wallet but no wallet found in DB!'))
-      } else {
-        debug("Got wallet:");
-        debug(result[0]);
-        deferred.resolve(BIP32Wallet(result[0]));
-      }
-    });
+    if (err) {
+      return deferred.reject(err);
+    }
+    if (!result || result.length < 1) {
+      return deferred.reject(new Error('Getting wallet but no wallet found in DB!'))
+    }
+    debug("Got wallet:", result[0]);
+    deferred.resolve(BIP32Wallet(result[0]));
+  });
   return deferred.promise;
 };
 
 var checkWallet = function(wallet) {
   var deferred = Q.defer();
+  debug('Checking Wallet');
   wallet.should.have.property('_id');
   wallet.updating.should.be.equal(false);
   deferred.resolve(wallet);
@@ -33,6 +39,7 @@ var checkWallet = function(wallet) {
 
 var updateWallet = function(wallet) {
   var deferred = Q.defer();
+  debug('Updating Wallet');
   wallet.update(function(err) {
     if (err) return deferred.reject(err);
     deferred.resolve(wallet);
@@ -43,6 +50,7 @@ var updateWallet = function(wallet) {
 function checkTransfers() {
 
   var deferred = Q.defer();
+  debug('Checking Transfers');
   mongo.db.collection('transfers').find({}).toArray(function(err, transfers) {
     if (err) return deferred.reject(err);
     transfers.length.should.be.above(90);
@@ -63,42 +71,45 @@ function checkTransfers() {
   return deferred.promise;
 }
 
-before(function(done) {
-  testDataManager.initDB(function(err) {
-    done(err);
+before(function (done) {
+  testDataManager.initDB(function (err) {
+    if (err) return done(err);
+    testDataManager.fillDB(['exchangeRates'], done);
   });
 });
-after(function(done) {
-  testDataManager.closeDB(function(err) {
-    if (err) console.log(err);
-    done(err);
-  });
+after(function (done) {
+  testDataManager.closeDB(done);
 });
 
+describe('Tests for Package Coyno Wallets', function() {
 
-describe('Basic Tests', function() {
-
-  before(function(done) {
-
-    testDataManager.fillDB(function(err) {
-      done(err);
-    });
+  describe('Unit tests', function () {
   });
-  after(function(done) {
-    testDataManager.emptyDB(function(err) {
-      if (err) console.log(err);
-      done(err);
-    });
-  });
-  describe('Update bitcoin wallet', function () {
-    it('should update all transactions for bitcoin wallet', function (done) {
-      getWallet({_id:"E2kQargHKujeY442B"})
-        .then(updateWallet)
-        .then(getWallet)
-        .then(checkWallet)
-        .then(checkTransfers)
-        .then(done).catch(done);
-    });
+
+  describe('Integration tests', function () {
+
+
+    describe('Wallet jobs tests', function() {
+
+
+      before(function (done) {
+        testDataManager.fillDB(['wallets'],done);
+      });
+
+      after(function (done) {
+        testDataManager.emptyDB(['wallets','transfers','addresses'],done);
+      });
+      describe('Update bitcoin wallet', function () {
+        it('should update all transactions for bitcoin wallet', function (done) {
+          getWallet(testDataManager.getWallet())
+            .then(updateWallet)
+            .then(getWallet)
+            .then(checkWallet)
+            .then(checkTransfers)
+            .then(done).catch(done);
+        });
+      });
+    })
   });
 });
 

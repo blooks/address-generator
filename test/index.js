@@ -71,15 +71,7 @@ function checkTransfers() {
   return deferred.promise;
 }
 
-before(function (done) {
-  testDataManager.initDB(function (err) {
-    if (err) return done(err);
-    testDataManager.fillDB(['exchangeRates'], done);
-  });
-});
-after(function (done) {
-  testDataManager.closeDB(done);
-});
+
 
 describe('Tests for Package Coyno Wallets', function() {
 
@@ -87,7 +79,15 @@ describe('Tests for Package Coyno Wallets', function() {
   });
 
   describe('Integration tests', function () {
-
+    before(function (done) {
+      testDataManager.initDB(function (err) {
+        if (err) return done(err);
+        testDataManager.fillDB(['exchangeRates'], done);
+      });
+    });
+    after(function (done) {
+      testDataManager.closeDB(done);
+    });
 
     describe('Wallet jobs tests', function() {
 

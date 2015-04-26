@@ -1,3 +1,5 @@
+require('./config');
+
 
 var TestDataManager = require('coyno-mockup-data').Manager;
 
@@ -8,6 +10,7 @@ var _ = require('lodash');
 var Q = require('q');
 var debug = require('debug')('coyno:wallet-tests');
 var BIP32Wallet = require('../lib/bip32');
+var SingleAddressesWallet = require('../lib/single-addresses');
 
 var testDataManager = new TestDataManager();
 
@@ -23,7 +26,10 @@ var getWallet = function(wallet) {
       return deferred.reject(new Error('Getting wallet but no wallet found in DB!'))
     }
     debug("Got wallet:", result[0]);
-    deferred.resolve(BIP32Wallet(result[0]));
+    if (result[0].type === 'single-addresses') {
+      return deferred.resolve(SingleAddressesWallet(result[0]));
+    }
+    return deferred.resolve(BIP32Wallet(result[0]));
   });
   return deferred.promise;
 };
@@ -101,7 +107,7 @@ describe('Tests for Package Coyno Wallets', function() {
       });
       describe('Update bitcoin wallet', function () {
         it('should update all transactions for bitcoin wallet', function (done) {
-          getWallet(testDataManager.getWallet())
+          getWallet(testDataManager.getWallet('bip32'))
             .then(updateWallet)
             .then(getWallet)
             .then(checkWallet)
@@ -109,7 +115,30 @@ describe('Tests for Package Coyno Wallets', function() {
             .then(done).catch(done);
         });
       });
-    })
+    });
+
+    describe('Heavy duty tests', function() {
+
+
+      before(function (done) {
+        testDataManager.fillDB(['wallets','addresses'],done);
+      });
+
+      after(function (done) {
+        testDataManager.emptyDB(['wallets','transfers','addresses'],done);
+      });
+      describe('Update bitcoin wallet', function () {
+        it('should update all transactions for bitcoin wallet', function (done) {
+          getWallet(testDataManager.getWallet('single-addresses'))
+            .then(updateWallet)
+            .then(getWallet)
+            .then(checkWallet)
+            .then(checkTransfers)
+            .then(done).catch(done);
+        });
+      });
+    });
+
   });
 });
 

@@ -1,0 +1,14 @@
+machine:
+  services:
+    - mongodb
+  environment:
+    MONGO_URL: mongodb://localhost:27017/coyno-tests
+
+dependencies:
+  override:
+   - echo "registry=https://registry.coyno.com/" >> .npmrc
+   - echo "_auth=Y2lyY2xlY2k6MFZnb2UkazVAcmIkb1BHQWViJkI=" >> .npmrc
+   - echo "email=circleci@coyno.com" >> .npmrc
+   - echo "always-auth=true" >> .npmrc
+   - echo "strict-ssl=false" >> .npmrc
+   - npm install

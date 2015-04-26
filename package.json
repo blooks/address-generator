@@ -10,12 +10,12 @@
   "author": "Coyno <coyno@coyno.com>",
   "contributors": [
     {
-      "name": "Leopoldo Godines",
-      "email": "lg@leopoldogodines.com"
-    },
-    {
       "name": "Levin Keller",
       "email": "levin@coyno.com"
+    },
+    {
+      "name": "Leopoldo Godines",
+      "email": "lg@leopoldogodines.com"
     }
   ],
   "scripts": {

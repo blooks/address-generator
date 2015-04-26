@@ -113,29 +113,28 @@ describe('Tests for Package Coyno Wallets', function() {
         });
       });
     });
+    if (process.env.HEAVY_DUTY) {
+      describe('Heavy duty tests', function () {
+        this.timeout(120000);
+        before(function (done) {
+          testDataManager.fillDB(['wallets', 'addresses'], done);
+        });
 
-    describe('Heavy duty tests', function() {
-
-
-      before(function (done) {
-        testDataManager.fillDB(['wallets','addresses'],done);
-      });
-
-      after(function (done) {
-        testDataManager.emptyDB(['wallets','transfers','addresses'],done);
-      });
-      describe('Update bitcoin wallet', function () {
-        it('should update all transactions for bitcoin wallet', function (done) {
-          getWallet(testDataManager.getWallet('single-addresses'))
-            .then(updateWallet)
-            .then(getWallet)
-            .then(checkWallet)
-            .then(checkTransfers)
-            .then(done).catch(done);
+        after(function (done) {
+          testDataManager.emptyDB(['wallets', 'transfers', 'addresses'], done);
+        });
+        describe('Update bitcoin wallet', function () {
+          it('should update all transactions for bitcoin wallet', function (done) {
+            getWallet(testDataManager.getWallet('single-addresses'))
+              .then(updateWallet)
+              .then(getWallet)
+              .then(checkWallet)
+              .then(checkTransfers)
+              .then(done).catch(done);
+          });
         });
       });
-    });
-
+    }
   });
 });
 

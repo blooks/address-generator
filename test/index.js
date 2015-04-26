@@ -1,10 +1,7 @@
-require('./config');
-
-
 var TestDataManager = require('coyno-mockup-data').Manager;
 
 
-var should = require('should');
+require('should');
 var mongo = require('coyno-mongo');
 var _ = require('lodash');
 var Q = require('q');

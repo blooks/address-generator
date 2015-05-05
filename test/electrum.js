@@ -55,16 +55,18 @@ var updateWallet = function(wallet) {
   return deferred.promise;
 };
 
-function checkAddresses() {
+function checkAddresses(wallet) {
   var deferred = Q.defer();
   log.debug('Checking Transfers');
   mongo.db.collection('bitcoinaddresses').find({}).toArray(function(err, addresses) {
     if (err) return deferred.reject(err);
-    addresses.length.should.be.equal(400);
+    addresses.length.should.be.above(100);
     addresses.forEach(function(address) {
       address.should.have.property('userId');
+      address.userId.should.be.equal(wallet.userId);
       address.should.have.property('_id');
       address.should.have.property('walletId');
+      address.walletId.should.be.equal(wallet._id);
       address.should.have.property('derivationParams');
       address.should.have.property('address');
       address.should.have.property('balance');

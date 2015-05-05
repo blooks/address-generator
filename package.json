@@ -30,7 +30,6 @@
     "bitcore-armory": "^0.1.2",
     "bitcore-electrum": "0.0.4",
     "coyno-chain": "0.1.x",
-    "coyno-config": "0.0.x",
     "coyno-converter": "0.0.x",
     "coyno-log": "0.0.x",
     "coyno-mongo": "0.1.x",

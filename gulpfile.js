@@ -11,7 +11,7 @@ var mfs = require('more-fs');
 
 
 var files = ['lib/**/*.js'];
-var tests = ['test/**/*.js'];
+var tests = ['test/index.js'];
 var alljs = files.concat(tests);
 
 

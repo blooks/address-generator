@@ -56,7 +56,7 @@ describe('Tests for Package Coyno Wallets', function() {
         });
         describe('Update bitcoin wallet', function () {
           it('should update all transactions for bitcoin wallet', function (done) {
-            getWallet(testDataManager.getWallet('single-addresses'))
+            getWallet(testDataManager.getWallet('bip32'))
               .then(updateWallet)
               .then(getWallet)
               .then(checkWallet)

@@ -15,7 +15,6 @@ var checkAddresses = function (wallet) {
   log.debug('Checking Addresses');
   mongo.db.collection('bitcoinaddresses').find({}).toArray(function(err, addresses) {
     if (err) return deferred.reject(err);
-    addresses.length.should.be.above(100);
     addresses.forEach(function(address) {
       address.should.have.property('userId');
       address.userId.should.be.equal(wallet.userId);
@@ -45,7 +44,7 @@ var getWallet = function(wallet) {
       return deferred.reject(new Error('Getting wallet but no wallet found in DB!'))
     }
     switch (result[0].type) {
-      case 'singleAddresses':
+      case 'single-addresses':
         return deferred.resolve(new SingleAddressesWallet(result[0]));
       case 'electrum':
         return deferred.resolve(new ElectrumWallet(result[0]));

@@ -8,6 +8,7 @@ var log = require('coyno-log').child({component: 'ElectrumWalletTests'});
 var BIP32Wallet = require('../lib/bip32');
 var SingleAddressesWallet = require('../lib/single-addresses');
 var ElectrumWallet = require('../lib/electrum');
+var ArmoryWallet = require('../lib/armory');
 
 
 var checkAddresses = function (wallet) {
@@ -48,6 +49,8 @@ var getWallet = function(wallet) {
         return deferred.resolve(new SingleAddressesWallet(result[0]));
       case 'electrum':
         return deferred.resolve(new ElectrumWallet(result[0]));
+      case 'armory':
+        return deferred.resolve(new ArmoryWallet(result[0]));
     }
     return deferred.resolve(new BIP32Wallet(result[0]));
   });

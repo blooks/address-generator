@@ -2,9 +2,7 @@ var TestDataManager = require('coyno-mockup-data').Manager;
 
 
 require('should');
-
 var _ = require('lodash');
-
 var log = require('coyno-log').child({component: 'ElectrumWalletTests'});
 
 var SingleAddressesWallet = require('../lib/single-addresses');
@@ -13,11 +11,7 @@ var Helper = require('./helper.js');
 
 var testDataManager = new TestDataManager();
 
-
-
-
-
-describe('Tests for electrum wallet', function() {
+describe('Tests for armory wallet', function() {
   describe('Derivation tests', function () {
     before(function (done) {
       testDataManager.initDB(done);
@@ -32,9 +26,9 @@ describe('Tests for electrum wallet', function() {
       after(function (done) {
         testDataManager.emptyDB(['wallets','addresses'],done);
       });
-      describe('Update electrum wallet', function () {
-        it('should generate 400 addresses for electrum wallet', function (done) {
-          Helper.getWallet(testDataManager.getWallet('electrum'))
+      describe('Update armory wallet', function () {
+        it('should generate 400 addresses for armory wallet', function (done) {
+          Helper.getWallet(testDataManager.getWallet('armory'))
             .then(Helper.updateWallet)
             .then(Helper.getWallet)
             .then(Helper.checkWallet)

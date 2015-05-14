@@ -22,7 +22,8 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "coverage": "gulp coverage",
-    "build": "gulp"
+    "build": "gulp",
+    "start": "forever index.js"
   },
   "dependencies": {
     "async": "^0.9.0",
@@ -31,6 +32,7 @@
     "bitcore-electrum": "0.0.4",
     "coyno-chain": "0.1.x",
     "coyno-converter": "0.0.x",
+    "coyno-dispatcher": "0.0.13",
     "coyno-kue": "0.0.14",
     "coyno-log": "0.0.x",
     "coyno-mongo": "0.1.x",

@@ -8,10 +8,10 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var jsdoc2md = require('jsdoc-to-markdown');
 var mfs = require('more-fs');
-
+var nodemon = require('nodemon');
 
 var files = ['lib/**/*.js'];
-var tests = ['test/**/*.js'];
+var tests = ['test/index.js'];
 var alljs = files.concat(tests);
 
 
@@ -65,3 +65,11 @@ gulp.task('watch:test', function() {
 });
 
 gulp.task('default', ['test', 'lint', 'jsdoc', 'coverage']);
+
+gulp.task('preview', function() {
+  nodemon({
+    script: 'index.js'
+    , ext: 'js'
+    , env: { 'NODE_ENV': 'development' }
+  })
+});

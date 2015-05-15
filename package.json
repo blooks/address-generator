@@ -1,6 +1,6 @@
 {
   "name": "coyno-address-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Address generator",
   "main": "index.js",
   "repository": {

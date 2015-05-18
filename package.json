@@ -1,6 +1,6 @@
 {
   "name": "coyno-address-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Address generator",
   "main": "index.js",
   "repository": {
@@ -23,7 +23,7 @@
     "test": "gulp test",
     "coverage": "gulp coverage",
     "build": "gulp",
-    "start": "forever index.js"
+    "start": "start index.js"
   },
   "dependencies": {
     "async": "^0.9.0",

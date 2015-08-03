@@ -5,10 +5,10 @@ var _ = require('lodash');
 var Q = require('q');
 var log = require('coyno-log').child({component: 'ElectrumWalletTests'});
 
-var BIP32Wallet = require('../lib/bip32');
-var SingleAddressesWallet = require('../lib/single-addresses');
-var ElectrumWallet = require('../lib/electrum');
-var ArmoryWallet = require('../lib/armory');
+var BIP32Wallet = require('../lib/wallets/bip32');
+var SingleAddressesWallet = require('../lib/wallets/single-addresses');
+var ElectrumWallet = require('../lib/wallets/electrum');
+var ArmoryWallet = require('../lib/wallets/armory');
 
 
 var checkAddresses = function (wallet) {

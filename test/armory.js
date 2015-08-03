@@ -5,8 +5,8 @@ require('should');
 var _ = require('lodash');
 var log = require('coyno-log').child({component: 'ElectrumWalletTests'});
 
-var SingleAddressesWallet = require('../lib/single-addresses');
-var BIP32Wallet = require('../lib/bip32');
+var SingleAddressesWallet = require('../lib/wallets/single-addresses');
+var BIP32Wallet = require('../lib/wallets/bip32');
 var Helper = require('./helper.js');
 
 var testDataManager = new TestDataManager();

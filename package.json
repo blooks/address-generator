@@ -19,11 +19,8 @@
     }
   ],
   "scripts": {
-    "lint": "gulp lint",
     "test": "exit 0",
-    "coverage": "gulp coverage",
-    "build": "gulp",
-    "start": "start index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "async": "^0.9.0",

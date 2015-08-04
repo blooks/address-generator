@@ -15,14 +15,16 @@ deployment:
   staging:
     branch: develop
     commands:
-      - docker info
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS tutum.co
       - docker build -t tutum.co/levino/coyno-address-generator:staging .
       - docker push tutum.co/levino/coyno-address-generator:staging
-  production:
+  release:
     branch: master
     commands:
       - npm publish
+  stable:
+    branch: stable
+    commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS tutum.co
       - docker build -t tutum.co/levino/coyno-address-generator .
       - docker push tutum.co/levino/coyno-address-generator

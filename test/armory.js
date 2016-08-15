@@ -1,42 +1,46 @@
-var TestDataManager = require('coyno-mockup-data').Manager;
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/coyno-address-generator-tests'
 
 
-require('should');
-var _ = require('lodash');
-var log = require('coyno-log').child({component: 'ElectrumWalletTests'});
+var TestDataManager = require('@blooks/test-data').Manager
 
-var SingleAddressesWallet = require('../lib/wallets/single-addresses');
-var BIP32Wallet = require('../lib/wallets/bip32');
-var Helper = require('./helper.js');
+require('should')
+var async = require('async')
+var Helper = require('./helper.js')
+var helper = new Helper(MONGO_URL)
 
-var testDataManager = new TestDataManager();
+var testDataManager = new TestDataManager(MONGO_URL)
 
-describe('Tests for armory wallet', function() {
+describe('Tests for armory wallet', function () {
   describe('Derivation tests', function () {
     before(function (done) {
-      testDataManager.initDB(done);
-    });
+      async.parallel([
+        testDataManager.start.bind(testDataManager),
+        helper.start.bind(helper)
+      ], done)
+    })
     after(function (done) {
-      testDataManager.closeDB(done);
-    });
-    describe('Wallet jobs tests', function() {
+      async.parallel([
+        testDataManager.stop.bind(testDataManager),
+        helper.stop.bind(helper)
+      ], done)
+    })
+    describe('Wallet jobs tests', function () {
       before(function (done) {
-        testDataManager.fillDB(['wallets'],done);
-      });
+        testDataManager.fillDB(['wallets'], done)
+      })
       after(function (done) {
-        testDataManager.emptyDB(['wallets','addresses'],done);
-      });
+        testDataManager.emptyDB(['wallets', 'addresses'], done)
+      })
       describe('Update armory wallet', function () {
         it('should generate 400 addresses for armory wallet', function (done) {
-          Helper.getWallet(testDataManager.getWallet('armory'))
-            .then(Helper.updateWallet)
-            .then(Helper.getWallet)
-            .then(Helper.checkWallet)
-            .then(Helper.checkAddresses)
-            .then(done).catch(done);
-        });
-      });
-    });
-  });
-});
-
+          helper.getWallet(testDataManager.getWallet('armory'))
+            .then(helper.updateWallet)
+            .then(helper.getWallet)
+            .then(helper.checkWallet)
+            .then(helper.checkAddresses)
+            .then(done).catch(done)
+        })
+      })
+    })
+  })
+})

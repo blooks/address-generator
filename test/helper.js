@@ -26,7 +26,7 @@ class Helper {
   checkAddresses (wallet) {
     var deferred = Q.defer()
     log.debug('Checking Addresses')
-    this._mongo.db.collection('bitcoinaddresses').find({}).toArray( (err, addresses) => {
+    this._mongo.db.collection('bitcoinaddresses').find({walletId: wallet._id}).toArray( (err, addresses) => {
       if (err) return deferred.reject(err)
       addresses.forEach( (address) => {
         address.should.have.property('userId')
@@ -57,13 +57,13 @@ class Helper {
       }
       switch (result[ 0 ].type) {
         case 'single-addresses':
-          return deferred.resolve(new SingleAddressesWallet(result[ 0 ]), this._mongo)
+          return deferred.resolve(new SingleAddressesWallet(result[ 0 ], this._mongo))
         case 'electrum':
-          return deferred.resolve(new ElectrumWallet(result[ 0 ]), this._mongo)
+          return deferred.resolve(new ElectrumWallet(result[ 0 ], this._mongo))
         case 'armory':
-          return deferred.resolve(new ArmoryWallet(result[ 0 ]), this._mongo)
+          return deferred.resolve(new ArmoryWallet(result[ 0 ], this._mongo))
       }
-      return deferred.resolve(new BIP32Wallet(result[ 0 ]), this._mongo)
+      return deferred.resolve(new BIP32Wallet(result[ 0 ], this._mongo))
     })
     return deferred.promise
   }
@@ -82,7 +82,7 @@ class Helper {
   updateWallet (wallet) {
     var deferred = Q.defer()
     log.debug('Updating Wallet')
-    wallet.update((err) => {
+    wallet.update(true, (err) => {
       if (err) return deferred.reject(err)
       deferred.resolve(wallet)
     })

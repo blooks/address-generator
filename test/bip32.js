@@ -42,10 +42,10 @@ describe('Tests for Package Coyno Wallets', function () {
       describe('Update bitcoin wallet', function () {
         it('should update all transactions for bitcoin wallet', function (done) {
           helper.getWallet(testDataManager.getWallet('bip32'))
-            .then(helper.updateWallet)
-            .then(helper.getWallet)
-            .then(helper.checkWallet)
-            .then(helper.checkAddresses)
+            .then(helper.updateWallet.bind(helper))
+            .then(helper.getWallet.bind(helper))
+            .then(helper.checkWallet.bind(helper))
+            .then(helper.checkAddresses.bind(helper))
             .then(done).catch(done)
         })
       })
@@ -62,11 +62,11 @@ describe('Tests for Package Coyno Wallets', function () {
         })
         describe('Update bitcoin wallet', function () {
           it('should update all transactions for bitcoin wallet', function (done) {
-            getWallet(testDataManager.getWallet('bip32'))
-              .then(updateWallet)
-              .then(getWallet)
-              .then(checkWallet)
-              .then(checkTransfers)
+            helper.getWallet(testDataManager.getWallet('bip32'))
+              .then(helper.updateWallet.bind(helper))
+              .then(helper.getWallet.bind(helper))
+              .then(helper.checkWallet.bind(helper))
+              .then(helper.checkAddresses.bind(helper))
               .then(done).catch(done)
           })
         })

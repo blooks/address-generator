@@ -32,10 +32,10 @@ describe('Tests for single address wallet', function () {
       describe('Update single address wallet', function () {
         it('should generate 0 addresses for single addresses wallet', function (done) {
           helper.getWallet(testDataManager.getWallet('single-addresses'))
-            .then(helper.updateWallet)
-            .then(helper.getWallet)
-            .then(helper.checkWallet)
-            .then(helper.checkAddresses)
+            .then(helper.updateWallet.bind(helper))
+            .then(helper.getWallet.bind(helper))
+            .then(helper.checkWallet.bind(helper))
+            .then(helper.checkAddresses.bind(helper))
             .then(done).catch(done)
         })
       })

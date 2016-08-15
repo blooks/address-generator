@@ -34,10 +34,10 @@ describe('Tests for armory wallet', function () {
       describe('Update armory wallet', function () {
         it('should generate 400 addresses for armory wallet', function (done) {
           helper.getWallet(testDataManager.getWallet('armory'))
-            .then(helper.updateWallet)
-            .then(helper.getWallet)
-            .then(helper.checkWallet)
-            .then(helper.checkAddresses)
+            .then(helper.updateWallet.bind(helper))
+            .then(helper.getWallet.bind(helper))
+            .then(helper.checkWallet.bind(helper))
+            .then(helper.checkAddresses.bind(helper))
             .then(done).catch(done)
         })
       })

@@ -1,17 +1,17 @@
 {
-  "name": "coyno-address-generator",
+  "name": "@blooks/address-generator",
   "version": "0.0.4",
   "description": "Address generator",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/coyno/coyno-address-generator.git"
+    "url": "http://github.com/blooks/address-generator.git"
   },
   "author": "Coyno <coyno@coyno.com>",
   "contributors": [
     {
       "name": "Levin Keller",
-      "email": "levin@coyno.com"
+      "email": "post@levinkeller.de"
     },
     {
       "name": "Leopoldo Godines",

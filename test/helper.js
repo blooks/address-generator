@@ -34,7 +34,9 @@ class Helper {
         address.should.have.property('_id')
         address.should.have.property('walletId')
         address.walletId.should.be.equal(wallet._id)
-        address.should.have.property('derivationParams')
+        if (address.order > -1) {
+          address.should.have.property('derivationParams')
+        }
         address.should.have.property('address')
         address.should.have.property('balance')
         address.should.have.property('createdAt')

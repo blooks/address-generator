@@ -1,6 +1,5 @@
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/coyno-address-generator-tests'
 
-
 var TestDataManager = require('@blooks/test-data').Manager
 
 require('should')

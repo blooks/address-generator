@@ -4,9 +4,6 @@ var TestDataManager = require('@blooks/test-data').Manager
 
 require('should')
 
-var _ = require('lodash')
-
-var log = require('@blooks/log').child({component: 'ElectrumWalletTests'})
 var async = require('async')
 var Helper = require('./helper.test.js')
 var helper = new Helper(MONGO_URL)

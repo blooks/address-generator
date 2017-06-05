@@ -3,7 +3,6 @@ const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/coyno-address-ge
 var TestDataManager = require('@blooks/test-data').Manager
 
 require('should')
-var _ = require('lodash')
 var Helper = require('./helper.test.js')
 var helper = new Helper(MONGO_URL)
 var testDataManager = new TestDataManager(MONGO_URL)

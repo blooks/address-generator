@@ -7,7 +7,7 @@
     "type": "git",
     "url": "http://github.com/blooks/address-generator.git"
   },
-  "author": "Coyno <coyno@coyno.com>",
+  "author": "Hardfork UG (haftungsbeschränkt)",
   "contributors": [
     {
       "name": "Levin Keller",
@@ -20,7 +20,8 @@
   ],
   "scripts": {
     "test": "NETWORK=testnet mocha -t 10000 -u tdd --compilers js:babel-core/register \"./{,!(node_modules)/**/}*.test.js\"",
-    "start": "node start.js"
+    "start": "node start.js",
+    "lint": "standard"
   },
   "dependencies": {
     "@blooks/jobs": "0.0.4",
@@ -45,7 +46,7 @@
     "nock": "^9.0.13",
     "q": "^1.4.1",
     "should": "^11.1.0",
-    "standard": "^7.1.2"
+    "standard": "^10.0.2"
   },
   "eslintConfig": {
     "env": {

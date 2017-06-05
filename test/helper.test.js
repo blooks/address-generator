@@ -1,7 +1,5 @@
 require('should')
 var Mongo = require('@blooks/mongo')
-var mongo
-var _ = require('lodash')
 var Q = require('q')
 var log = require('@blooks/log').child({ component: 'ElectrumWalletTests' })
 
@@ -26,9 +24,9 @@ class Helper {
   checkAddresses (wallet) {
     var deferred = Q.defer()
     log.debug('Checking Addresses')
-    this._mongo.db.collection('bitcoinaddresses').find({walletId: wallet._id}).toArray( (err, addresses) => {
+    this._mongo.db.collection('bitcoinaddresses').find({walletId: wallet._id}).toArray((err, addresses) => {
       if (err) return deferred.reject(err)
-      addresses.forEach( (address) => {
+      addresses.forEach((address) => {
         address.should.have.property('userId')
         address.userId.should.be.equal(wallet.userId)
         address.should.have.property('_id')

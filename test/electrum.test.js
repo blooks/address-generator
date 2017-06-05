@@ -1,15 +1,15 @@
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/coyno-address-generator-tests'
+import MONGO_URL from './mongo'
 
-var TestDataManager = require('@blooks/test-data').Manager
-
+import Promise from 'bluebird'
 require('should')
+const async = require('async')
 
-var async = require('async')
-var Helper = require('./helper.test.js')
-var helper = new Helper(MONGO_URL)
-var testDataManager = new TestDataManager(MONGO_URL)
+const TestDataManager = require('@blooks/test-data').Manager
+const Helper = require('./helper.test.js')
+const helper = new Helper(MONGO_URL)
+const testDataManager = new TestDataManager(MONGO_URL)
 
-describe('Tests for electrum wallet', function () {
+describe.only('Tests for electrum wallet', function () {
   describe('Derivation tests', function () {
     before(function (done) {
       async.parallel([
@@ -24,21 +24,18 @@ describe('Tests for electrum wallet', function () {
       ], done)
     })
     describe('Wallet jobs tests', function () {
-      before(function (done) {
+      beforeEach(function (done) {
         testDataManager.fillDB(['wallets'], done)
       })
-      after(function (done) {
+      afterEach(function (done) {
         testDataManager.emptyDB(['wallets', 'addresses'], done)
       })
-      describe('Update electrum wallet', function () {
-        it('should generate 400 addresses for electrum wallet', function (done) {
-          helper.getWallet(testDataManager.getWallet('electrum'))
-            .then(helper.updateWallet.bind(helper))
-            .then(helper.getWallet.bind(helper))
-            .then(helper.checkWallet.bind(helper))
-            .then(helper.checkAddresses.bind(helper))
-            .then(done).catch(done)
-        })
+      it('should generate 400 addresses for electrum wallet', function () {
+        return helper.getWallet(testDataManager.getWallet('electrum'))
+          .then(helper.updateWallet.bind(helper))
+          .then(helper.getWallet.bind(helper))
+          .then(helper.checkWallet.bind(helper))
+          .then(helper.checkAddresses.bind(helper))
       })
     })
   })

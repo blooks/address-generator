@@ -29,6 +29,7 @@
     "async": "^2.0.1",
     "bitcore-armory": "^0.1.2",
     "bitcore-lib": "^0.13.19",
+    "bluebird": "^3.5.0",
     "kue": "^0.11.1",
     "lodash": "^4.15.0",
     "meteor-random": "0.0.3",
@@ -45,6 +46,7 @@
     "mocha": "^3.0.2",
     "nock": "^9.0.13",
     "q": "^1.4.1",
+    "randomstring": "^1.1.5",
     "should": "^11.1.0",
     "standard": "^10.0.2"
   },

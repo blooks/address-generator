@@ -19,22 +19,30 @@
     }
   ],
   "scripts": {
-    "test": "mocha test -t 10000",
+    "test": "NETWORK=testnet mocha -t 10000 -u tdd --compilers js:babel-core/register \"./{,!(node_modules)/**/}*.test.js\"",
     "start": "node start.js"
   },
   "dependencies": {
     "@blooks/jobs": "0.0.4",
-    "@blooks/log": "^0.2.4",
+    "@blooks/log": "^0.2.6",
     "async": "^2.0.1",
     "bitcore-armory": "^0.1.2",
     "bitcore-lib": "^0.13.19",
     "kue": "^0.11.1",
     "lodash": "^4.15.0",
-    "meteor-random": "0.0.3"
+    "meteor-random": "0.0.3",
+    "superagent": "^3.5.2"
   },
   "devDependencies": {
     "@blooks/test-data": "^0.1.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.0.1",
     "mocha": "^3.0.2",
+    "nock": "^9.0.13",
     "q": "^1.4.1",
     "should": "^11.1.0",
     "standard": "^7.1.2"

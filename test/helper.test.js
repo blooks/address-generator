@@ -21,6 +21,16 @@ class Helper {
     this._mongo.stop(callback)
   }
 
+  getAddresses (wallet) {
+    var deferred = Q.defer()
+    log.debug('Checking Addresses')
+    this._mongo.db.collection('bitcoinaddresses').find({walletId: wallet._id}).toArray((err, addresses) => {
+      if (err) return deferred.reject(err)
+      deferred.resolve(addresses)
+    })
+    return deferred.promise
+  }
+
   checkAddresses (wallet) {
     var deferred = Q.defer()
     log.debug('Checking Addresses')
@@ -40,7 +50,7 @@ class Helper {
         address.should.have.property('createdAt')
         address.should.have.property('updatedAt')
       })
-      deferred.resolve()
+      deferred.resolve(wallet)
     })
     return deferred.promise
   }
